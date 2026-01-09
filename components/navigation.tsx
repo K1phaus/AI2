@@ -19,12 +19,22 @@ export default async function Navigation() {
             >
               Home
             </Link>
-            <Link
-              href="/dashboard"
-              className="text-sm font-medium text-gray-700 hover:text-gray-900"
-            >
-              Dashboard
-            </Link>
+            {user && (
+              <>
+                <Link
+                  href="/equipment"
+                  className="text-sm font-medium text-gray-700 hover:text-gray-900"
+                >
+                  Equipment
+                </Link>
+                <Link
+                  href="/dashboard"
+                  className="text-sm font-medium text-gray-700 hover:text-gray-900"
+                >
+                  Dashboard
+                </Link>
+              </>
+            )}
             {!user && (
               <Link
                 href="/login"
