@@ -1,10 +1,22 @@
+import { redirect } from "next/navigation";
 import LoginForm from "@/components/login-form";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export default async function Login({
   searchParams,
 }: {
   searchParams: Promise<{ error?: string }>;
 }) {
+  // If already signed in, redirect to dashboard
+  const supabase = await createServerSupabaseClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    redirect("/dashboard");
+  }
+
   const params = await searchParams;
   return (
     <div>
